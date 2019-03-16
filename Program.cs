@@ -9,13 +9,14 @@ namespace CentralTelefonica
     {
         static void Main(string[] args)
         {
-            try{
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.MostrarMenu();
-            }catch(OpcionMenuException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            
+           // MenuPrincipal menu = new MenuPrincipal();
+            //menu.MostrarMenu();
+            Console.WriteLine($"Fecha: {fecha.Da}");
+            Console.WriteLine($"Día: {fecha.Da}");
+            Console.WriteLine($"Hora: {fecha.Da}");
+            Console.WriteLine($"Día: {fecha.Da}");//yppppppp
         }
+        
     }
 }

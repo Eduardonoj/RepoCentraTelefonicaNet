@@ -37,49 +37,79 @@ namespace CentralTelefonica.App
             do
             {
 
-                try{
-
-                // en todas las writeLine que tenemos tendriamos que colocar console. para que funcione pero para
-                // ya no colocarle solo se importa "using static system.console;"
-                WriteLine("1. Registrar llamada local");
-                WriteLine("2. Registrar llamada departamental");
-                WriteLine("3. Costo total de las llamadas locales");
-                WriteLine("4. Costo total de las llamadas departamentales");
-                WriteLine("5. Costo total de las llamadas");
-                WriteLine("6. Mostrar Resumen");
-                WriteLine("0. Salir");
-                WriteLine("Ingrese su opcion===");
-                string valor = ReadLine(); //al principio de ReadLine no se coloco console xq tenemos arriba importado "system.Console" 
-                opcion = Convert.ToInt16(valor); //estoy utilizando la clase convert utilizando un metodo que tiene llamado ToInt16 la cual recibe un valor string llamado valor
-                if (opcion == 1)
+                try
                 {
-                    RegistrarLlamada(opcion);
-                }
-                else if (opcion == 2){
-                    RegistrarLlamada(opcion); 
-                }
 
-                else if (opcion == 6)
-                {
-                    MostrarDetalleForeach();
+                    // en todas las writeLine que tenemos tendriamos que colocar console. para que funcione pero para
+                    // ya no colocarle solo se importa "using static system.console;"
+                    Clear();
+                    WriteLine("1. Registrar llamada local");
+                    WriteLine("2. Registrar llamada departamental");
+                    WriteLine("3. Costo total de las llamadas locales");
+                    WriteLine("4. Costo total de las llamadas departamentales");
+                    WriteLine("5. Costo total de las llamadas");
+                    WriteLine("6. Mostrar Resumen");
+                    WriteLine("0. Salir");
+                    WriteLine("Ingrese su opcion===");
+                    string valor = ReadLine(); //al principio de ReadLine no se coloco console xq tenemos arriba importado "system.Console" 
+                                               // opcion = Convert.ToInt16(valor); //estoy utilizando la clase convert utilizando un metodo que tiene llamado ToInt16 la cual recibe un valor string llamado valor
+                    if (EsNumero(valor) == true)
+                    {
+                        opcion = Convert.ToInt16(valor);
+                    }
 
+                    if (opcion == 1)
+                    {
+                        RegistrarLlamada(opcion);
+                    }
+                    else if (opcion == 2)
+                    {
+                        RegistrarLlamada(opcion);
+                    }
+                    else if (opcion == 3)
+                    {
+                        MostrarCostoLlamadasLocales();
+                    }
+                    else if (opcion == 4)
+                    {
+                        MostrarDetalleLlamadasDepto();
+
+                    else if (opcion == 6)
+                    {
+                        MostrarDetalle();
+
+                    }
                 }
-                }catch (OpcionMenuException e)
+                catch (OpcionMenuException e)
                 {
-                   throw new OpcionMenuException();
+                    Write(e.Message);
+
                 }
 
             } while (opcion != 0);
 
         }
-
+        public Boolean EsNumero(string valor)
+        {
+            Boolean resultado = false;
+            try
+            {
+                int numero = Convert.ToInt16(valor);
+                resultado = true;
+            }
+            catch (Exception e)
+            {
+                throw new OpcionMenuException();
+            }
+            return resultado;
+        }
 
         public void RegistrarLlamada(int opcion)
         {
             string numeroOrigen = "";
             string numeroDestino = "";
             string duracion = "";
-           // string tipo = "";
+            // string tipo = "";
             Llamada llamada = null;
             WriteLine("Ingrese el numero de origen");
             numeroOrigen = ReadLine();
@@ -101,10 +131,10 @@ namespace CentralTelefonica.App
                 /*  llamada.NumeroDestino = numeroDestino;
                  llamada.NumeroOrigen = numeroOrigen;
                  llamada.Duracion = Convert.ToDouble(duracion); */
-                ((LlamadaDepartamental)llamada).PrecioUno = precioTresDepartamental;
+                ((LlamadaDepartamental)llamada).PrecioUno = precioUnoDepartamental;
                 ((LlamadaDepartamental)llamada).PrecioDos = precioDosDepartamental;
                 ((LlamadaDepartamental)llamada).PrecioTres = precioTresDepartamental;
-                ((LlamadaDepartamental)llamada).Franja = 0;
+                ((LlamadaDepartamental)llamada).Franja = calcularFrjanja();
             }
             else
             {
@@ -112,39 +142,111 @@ namespace CentralTelefonica.App
             }
             this.ListaDeLlamadas.Add(llamada);
         }
-        public void MostrarDetalleWhile()
+        /* public void MostrarDetalleWhile()
+         {
+             int i = 0;
+             while (this.ListaDeLlamadas.Count > i)
+             {
+                 WriteLine(this.ListaDeLlamadas[i]);
+                 i = i + 1;
+
+
+             }
+         }
+          public void MostrarDetalleDoWhile()
+         {
+             int i = 0;
+
+             do
+             {
+                 WriteLine(this.ListaDeLlamadas[i]);
+                 i++;
+             } while (this.ListaDeLlamadas.Count > i);
+         }
+         public void MostarDetalleFor()
+         {
+             for (int i = 0; i < this.ListaDeLlamadas.Count; i++)
+             {
+                 WriteLine(this.ListaDeLlamadas[i]);
+             }
+         }*/
+        public void MostrarDetalle()
         {
-            int i = 0;
-            while (this.ListaDeLlamadas.Count > i)
+
+            foreach (var llamada in ListaDeLlamadas)
             {
-                WriteLine(this.ListaDeLlamadas[i]);
-                i = i + 1;
-
-
+                WriteLine(llamada);
             }
         }
-        public void MostrarDetalleDoWhile()
-        {
-            int i = 0;
-            
-            do
-            {
-                WriteLine(this.ListaDeLlamadas[i]);
-                i++;
-            }while(this.ListaDeLlamadas.Count > i);
-        }
-        public void MostarDetalleFor()
-        {
-            for (int i = 0; i < this.ListaDeLlamadas.Count; i++){
-            WriteLine(this.ListaDeLlamadas[i]);
-            }
-        }
-        public void MostrarDetalleForeach(){
 
-        foreach (var llamada in ListaDeLlamadas)
+        public void MostrarCostoLlamadasLocales()
         {
-            WriteLine(llamada);
+
+            double tiempoLlamada = 0;
+            double costoTotal = 0.0;
+            foreach (var elemento in ListaDeLlamadas)
+            {
+                if (elemento.GetType() == typeof(LlamadaLocal))// aqui hago que con GetType me devuelva el tipo de elemento y compare si elemento tiene la instancia de llamada local
+                {
+                    tiempoLlamada += elemento.Duracion;
+                    costoTotal += elemento.CalcularPrecio();
+                }
+
+            }
+            WriteLine($"Costo minuto: {precioLocal}");
+            WriteLine($"Tiempo total de llamadas: {tiempoLlamada} ");
+            WriteLine($"Costo total: {costoTotal}");
+
         }
+        public void MostrarDetalleLlamadasDepto()
+        {
+            double tiempoLlamadaFranjaUno = 0;
+            double tiempoLlamadaFranjaDos = 0;
+            double tiempoLlamadaFranjaTres = 0;
+            double costoTotal = 0.0;
+
+            double costoTotalFranjaUno = 0.0;
+            double costoTotalFranjaDos = 0.0;
+            double costoTotalFranjaTres = 0.0;
+            foreach (var elemento in ListaDeLlamadas)
+            {
+                if (elemento.GetType() == typeof(LlamadaDepartamental))
+                {
+                    switch(((LlamadaDepartamental)elemento).Franja)
+                    {
+                        case 0:
+                        tiempoLlamadaFranjaUno += elemento.Duracion;
+                        costoTotalFranjaUno += elemento.CalcularPrecio();
+                        break;
+
+                        case 1:
+                        tiempoLlamadaFranjaDos += elemento.Duracion;
+                        costoTotalFranjaDos += elemento.CalcularPrecio();
+                        break;
+
+                        case 2:
+                        tiempoLlamadaFranjaTres += elemento.Duracion;
+                        costoTotalFranjaTres += elemento.CalcularPrecio();
+                        break;
+                    }
+                }
+            }
+            WriteLine($"Franja: 1");
+            WriteLine($"Tiempo total de llamadas: {tiempoLlamadaFranjaUno}");
+            WriteLine($"Costo total: {costoTotalFranjaUno}");
+
+            WriteLine($"Franja: 2");
+            WriteLine($"Tiempo total de llamadas: {tiempoLlamadaFranjaDos}");
+            WriteLine($"Costo total: {costoTotalFranjaDos}");
+
+            WriteLine($"Franja: 3");
+            WriteLine($"Tiempo total de llamadas: {tiempoLlamadaFranjaTres}");
+            WriteLine($"Costo total: {costoTotalFranjaTres}");
         }
+        
     }
 }
+public int calcularFranja(DateTime )
+        {
+
+        }
