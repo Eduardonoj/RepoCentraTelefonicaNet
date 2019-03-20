@@ -20,3 +20,14 @@ C:\Users\programacion\Documents\modulos\CentralTelefonica\obj\Debug\netcoreapp2.
 C:\Users\programacion\Documents\modulos\CentralTelefonica\obj\Debug\netcoreapp2.2\CentralTelefonica.AssemblyInfo.cs
 C:\Users\programacion\Documents\modulos\CentralTelefonica\obj\Debug\netcoreapp2.2\CentralTelefonica.dll
 C:\Users\programacion\Documents\modulos\CentralTelefonica\obj\Debug\netcoreapp2.2\CentralTelefonica.pdb
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\obj\Debug\netcoreapp2.2\CentralTelefonica.csprojAssemblyReference.cache
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\obj\Debug\netcoreapp2.2\CentralTelefonica.csproj.CoreCompileInputs.cache
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\obj\Debug\netcoreapp2.2\CentralTelefonica.AssemblyInfoInputs.cache
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\obj\Debug\netcoreapp2.2\CentralTelefonica.AssemblyInfo.cs
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\obj\Debug\netcoreapp2.2\CentralTelefonica.dll
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\obj\Debug\netcoreapp2.2\CentralTelefonica.pdb
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\bin\Debug\netcoreapp2.2\CentralTelefonica.deps.json
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\bin\Debug\netcoreapp2.2\CentralTelefonica.runtimeconfig.json
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\bin\Debug\netcoreapp2.2\CentralTelefonica.runtimeconfig.dev.json
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\bin\Debug\netcoreapp2.2\CentralTelefonica.dll
+C:\Users\EDUARDO\Documents\NETPROYECTOS\RepoCentraTelefonicaNet\bin\Debug\netcoreapp2.2\CentralTelefonica.pdb

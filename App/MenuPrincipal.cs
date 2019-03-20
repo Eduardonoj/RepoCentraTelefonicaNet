@@ -13,7 +13,7 @@ namespace CentralTelefonica.App
                                                             //puede venir un float o un double no se le coloca nada (hago la prueba si le quito f me da error)
         private const float precioDosDepartamental = 0.85f;
         private const float precioTresDepartamental = 0.90f;
-        private const float precioLocal = 0.40f;
+        private const float precioLocal = 1.25f;
 
 
 
@@ -24,12 +24,9 @@ namespace CentralTelefonica.App
 
         public MenuPrincipal()
         {
-            ListaDeLlamadas = new List<Llamada>();
+            this.ListaDeLlamadas = new List<Llamada>();
 
         }
-
-
-
         public void MostrarMenu()
         {
             int opcion = 100;
@@ -74,15 +71,16 @@ namespace CentralTelefonica.App
                     {
                         MostrarDetalleLlamadasDepto();
 
-                    else if (opcion == 6)
-                    {
-                        MostrarDetalle();
+                    }else if (opcion == 6)
+                        {
+                            MostrarDetalle();
 
+                        }
                     }
-                }
+                
                 catch (OpcionMenuException e)
                 {
-                    Write(e.Message);
+                    WriteLine(e.Message);
 
                 }
 
@@ -134,7 +132,7 @@ namespace CentralTelefonica.App
                 ((LlamadaDepartamental)llamada).PrecioUno = precioUnoDepartamental;
                 ((LlamadaDepartamental)llamada).PrecioDos = precioDosDepartamental;
                 ((LlamadaDepartamental)llamada).PrecioTres = precioTresDepartamental;
-                ((LlamadaDepartamental)llamada).Franja = calcularFrjanja();
+                ((LlamadaDepartamental)llamada).Franja = calcularFranja(DateTime.Now);
             }
             else
             {
@@ -212,41 +210,45 @@ namespace CentralTelefonica.App
             {
                 if (elemento.GetType() == typeof(LlamadaDepartamental))
                 {
-                    switch(((LlamadaDepartamental)elemento).Franja)
+                    switch (((LlamadaDepartamental)elemento).Franja)
                     {
                         case 0:
-                        tiempoLlamadaFranjaUno += elemento.Duracion;
-                        costoTotalFranjaUno += elemento.CalcularPrecio();
-                        break;
+                            tiempoLlamadaFranjaUno += elemento.Duracion;
+                            costoTotalFranjaUno += elemento.CalcularPrecio();
+                            break;
 
                         case 1:
-                        tiempoLlamadaFranjaDos += elemento.Duracion;
-                        costoTotalFranjaDos += elemento.CalcularPrecio();
-                        break;
+                            tiempoLlamadaFranjaDos += elemento.Duracion;
+                            costoTotalFranjaDos += elemento.CalcularPrecio();
+                            break;
 
                         case 2:
-                        tiempoLlamadaFranjaTres += elemento.Duracion;
-                        costoTotalFranjaTres += elemento.CalcularPrecio();
-                        break;
+                            tiempoLlamadaFranjaTres += elemento.Duracion;
+                            costoTotalFranjaTres += elemento.CalcularPrecio();
+                            break;
                     }
                 }
             }
+
             WriteLine($"Franja: 1");
+            WriteLine($"Costo minuto: {precioUnoDepartamental}");
             WriteLine($"Tiempo total de llamadas: {tiempoLlamadaFranjaUno}");
             WriteLine($"Costo total: {costoTotalFranjaUno}");
 
             WriteLine($"Franja: 2");
+            WriteLine($"Costo minuto: {precioDosDepartamental}");
             WriteLine($"Tiempo total de llamadas: {tiempoLlamadaFranjaDos}");
             WriteLine($"Costo total: {costoTotalFranjaDos}");
 
             WriteLine($"Franja: 3");
+            WriteLine($"Costo minuto: {precioTresDepartamental}");
             WriteLine($"Tiempo total de llamadas: {tiempoLlamadaFranjaTres}");
             WriteLine($"Costo total: {costoTotalFranjaTres}");
         }
-        
+        public int calcularFranja(DateTime fecha)
+        {
+            int resultado = -1;
+            return resultado; //0,1,2
+        }
     }
 }
-public int calcularFranja(DateTime )
-        {
-
-        }

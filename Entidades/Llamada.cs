@@ -1,3 +1,4 @@
+
 namespace CentralTelefonica.Entidades
 {
     public abstract class Llamada
