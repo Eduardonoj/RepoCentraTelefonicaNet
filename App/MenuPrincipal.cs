@@ -15,8 +15,6 @@ namespace CentralTelefonica.App
         private const float precioTresDepartamental = 0.90f;
         private const float precioLocal = 1.25f;
 
-
-
         // public List<Llamada> ListaDeLlamadas = new 
         public List<Llamada> ListaDeLlamadas { get; set; } //este es otro tipo de encapsulamiento, por ejemplo yo no voy a validad que este 
                                                            //vacio, que este nula, si no voy a hacer algun tipo de validacion puedo usar esta forma de encapsulamiento
@@ -39,7 +37,7 @@ namespace CentralTelefonica.App
 
                     // en todas las writeLine que tenemos tendriamos que colocar console. para que funcione pero para
                     // ya no colocarle solo se importa "using static system.console;"
-                    Clear();
+                    //Clear();
                     WriteLine("1. Registrar llamada local");
                     WriteLine("2. Registrar llamada departamental");
                     WriteLine("3. Costo total de las llamadas locales");
@@ -71,13 +69,14 @@ namespace CentralTelefonica.App
                     {
                         MostrarDetalleLlamadasDepto();
 
-                    }else if (opcion == 6)
-                        {
-                            MostrarDetalle();
-
-                        }
                     }
-                
+                    else if (opcion == 6)
+                    {
+                        MostrarDetalle();
+
+                    }
+                }
+
                 catch (OpcionMenuException e)
                 {
                     WriteLine(e.Message);
@@ -245,10 +244,55 @@ namespace CentralTelefonica.App
             WriteLine($"Tiempo total de llamadas: {tiempoLlamadaFranjaTres}");
             WriteLine($"Costo total: {costoTotalFranjaTres}");
         }
+        /*  public int calcularFranja(DateTime fecha)
+         {
+             int resultado = -1;
+             return resultado; //0,1,2
+         }*/
+
         public int calcularFranja(DateTime fecha)
         {
-            int resultado = -1;
-            return resultado; //0,1,2
+            int franja = 0;
+            fecha = DateTime.Now;
+            int dia = (int)fecha.DayOfWeek;
+            int hora = fecha.Hour;
+            int minutos = fecha.Minute;
+
+                if ((hora >= 6 && hora <= 21) && (dia >= 1 && dia <=5))
+                {
+                        franja = 0;
+                }else if (hora >= 22 || hora <= 5 )
+                {
+                    if(dia >= 1 && dia <= 5)
+                    {
+                        franja = 1;
+                    }else if (dia == 5 || dia == 6 || dia == 0 || dia == 1 )
+                    {
+                        franja = 2;
+                    }
+                }
+          /*   if (dia >= 1 && dia <= 5)// si dia estan entre lunes a viernes
+            {
+                if (hora >= 6 && hora <= 21) //si la hora esta entre 6:00 a 21:59
+                {
+                    franja = 0;
+                }
+                else if (hora >= 22 || hora <= 5)//si la hora esta entre 22:00 a 5:59
+                {
+                    franja = 1;
+                }
+                else if ((hora >= 22 || hora <= 5) && (dia == 5 || dia == 1))//si hora es de 22:00 a 5:59
+                {
+                    franja = 2;
+                }
+            }
+            else if (dia == 7 || dia == 0)
+            {
+                franja = 2;
+            }   
+            return franja;
+        }*/
+            return franja;
         }
     }
 }
