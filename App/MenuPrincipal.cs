@@ -244,6 +244,7 @@ namespace CentralTelefonica.App
             WriteLine($"Tiempo total de llamadas: {tiempoLlamadaFranjaTres}");
             WriteLine($"Costo total: {costoTotalFranjaTres}");
         }
+
         /*  public int calcularFranja(DateTime fecha)
          {
              int resultado = -1;
@@ -258,41 +259,79 @@ namespace CentralTelefonica.App
             int hora = fecha.Hour;
             int minutos = fecha.Minute;
 
-                if ((hora >= 6 && hora <= 21) && (dia >= 1 && dia <=5))
-                {
-                        franja = 0;
-                }else if (hora >= 22 || hora <= 5 )
-                {
-                    if(dia >= 1 && dia <= 5)
-                    {
-                        franja = 1;
-                    }else if (dia == 5 || dia == 6 || dia == 0 || dia == 1 )
-                    {
-                        franja = 2;
-                    }
-                }
-          /*   if (dia >= 1 && dia <= 5)// si dia estan entre lunes a viernes
+            if (dia >= 1 && dia <= 5)// si dia estan entre lunes a viernes
             {
                 if (hora >= 6 && hora <= 21) //si la hora esta entre 6:00 a 21:59
                 {
                     franja = 0;
                 }
+                else if ((hora >= 22 && dia == 5) || (hora <= 5 && dia == 1))//si hora es mayor o igual a 22:00 y dia igual a 5=viernes o
+                {                                                            //si hora es menor o igual a 5:59 y dia es igual a 1=lunes
+                    franja = 2;
+                }
+
+
                 else if (hora >= 22 || hora <= 5)//si la hora esta entre 22:00 a 5:59
                 {
                     franja = 1;
                 }
-                else if ((hora >= 22 || hora <= 5) && (dia == 5 || dia == 1))//si hora es de 22:00 a 5:59
-                {
-                    franja = 2;
-                }
+
             }
-            else if (dia == 7 || dia == 0)
+            else if (dia == 6 || dia == 0)//si dia es igual a 6=sabado o igual a 0=domingo
             {
                 franja = 2;
-            }   
-            return franja;
-        }*/
+            }
             return franja;
         }
+
+
+
+        //SEGUNDA OPCION DE CALCULAR FRANJA
+        /*   public int calcularFranja(DateTime fecha)
+          {
+              int franja = 0;
+              fecha = DateTime.Now;
+              int dia = (int)fecha.DayOfWeek;
+              int hora = fecha.Hour;
+              int minutos = fecha.Minute;
+
+                  if ((hora >= 6 && hora <= 21) && (dia >= 1 && dia <=5))
+                  {
+                          franja = 0;
+                  }else if (hora >= 22 || hora <= 5 )
+                  {
+                      if(dia >= 1 && dia <= 5)
+                      {
+                          franja = 1;
+                      }else if (dia == 5 || dia == 6 || dia == 0 || dia == 1 )
+                      {
+                          franja = 2;
+                      }
+                  }
+                      return franja;
+          }*/
+        //PRIMERA PRUEBA DE CALCULAR FRANJA
+        /*   if (dia >= 1 && dia <= 5)// si dia estan entre lunes a viernes
+          {
+              if (hora >= 6 && hora <= 21) //si la hora esta entre 6:00 a 21:59
+              {
+                  franja = 0;
+              }
+              else if (hora >= 22 || hora <= 5)//si la hora esta entre 22:00 a 5:59
+              {
+                  franja = 1;
+              }
+              else if ((hora >= 22 || hora <= 5) && (dia == 5 || dia == 1))//si hora es de 22:00 a 5:59
+              {
+                  franja = 2;
+              }
+          }
+          else if (dia == 7 || dia == 0)
+          {
+              franja = 2;
+          }   
+          return franja;
+      }*/
+
     }
 }
